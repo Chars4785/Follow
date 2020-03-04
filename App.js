@@ -4,7 +4,7 @@ import {createStore} from 'redux'
 import {
   StyleSheet,View,Text
 } from 'react-native';
-import RootNavigate from './app/components/RootNavigate'
+import RootNavigate from './app/components/Navigate/RootNavigate'
 import reducer from './reducers'
 
 const store = createStore(reducer)
