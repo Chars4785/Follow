@@ -10,6 +10,7 @@ const SNS_URL = 'https://www.instagram.com/follow_univ8/'
 const YOUTUB_URL = 'https://www.youtube.com/channel/UCO5cYdn0sDFVowC8mV-gHBw';
 
 const Home = ({ navigation }) => {
+  //test
 
 
   const onPressMypage = () =>{
