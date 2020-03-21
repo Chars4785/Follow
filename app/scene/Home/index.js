@@ -11,6 +11,7 @@ const YOUTUB_URL = 'https://www.youtube.com/channel/UCO5cYdn0sDFVowC8mV-gHBw';
 
 const Home = ({ navigation }) => {
 
+
   const onPressMypage = () =>{
     navigation.navigate({
       name:'MyPage'
@@ -32,6 +33,12 @@ const Home = ({ navigation }) => {
   const onPressMyGBS = () =>{
     navigation.navigate({
       name:'MyGBS'
+    })
+  }
+
+  const onPressLeader = () =>{
+    navigation.navigate({
+      name:'LeaderGBS'
     })
   }
 
@@ -78,13 +85,17 @@ const Home = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity style={styles.PrayerLetterStyle} onPress={onPressPrayerLetter}>
           {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
-          <Text style={{fontSize:hsv(50)}}>{moment().month()}</Text>
+          <Text style={{fontSize:hsv(50)}}>{moment().month()+1}</Text>
           <Image source={Images.imgMonth} />
           <Text>기도 편지함</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.MyGBS_Style} onPress={onPressMyGBS}>
           {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
           <Text> GBS </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.MyGBS_Style} onPress={onPressLeader}>
+          {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
+          <Text> GBS 관리 </Text>
         </TouchableOpacity>
         <View style={styles.infoTextView}>
           <Text style={styles.InfName}>  Info. </Text>
