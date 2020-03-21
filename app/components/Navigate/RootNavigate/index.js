@@ -7,6 +7,7 @@ import LoginScene from '../../../scene/LoginScene';
 import FollowNews from '../../../scene/FollowNews';
 import PrayerLetter from '../../../scene/PrayerLetter';
 import MyGBS from '../../../scene/MyGBS';
+import LeaderGBS from '../../../scene/LeaderGBS';
 import MyPage from '../../../scene/MyPage';
 import TabNavigator from '../TabNavigator'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -37,6 +38,10 @@ function RootNavigate() {
             }}
         />
         <Stack.Screen
+            name="TabNavigator"
+            component={TabNavigator}
+        />
+        <Stack.Screen
             name="FollowNews"
             component={FollowNews}
         />
@@ -49,12 +54,12 @@ function RootNavigate() {
             component={MyGBS}
         />
         <Stack.Screen
-            name="MyPage"
-            component={MyPage}
+            name="LeaderGBS"
+            component={LeaderGBS}
         />
         <Stack.Screen
-            name="TabNavigator"
-            component={TabNavigator}
+            name="MyPage"
+            component={MyPage}
         />
         </Stack.Navigator>
       </NavigationContainer>
