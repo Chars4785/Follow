@@ -17,12 +17,12 @@ function RootNavigate() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Splash"
-        screenOptions={{
-            headerStyle:{ backgroundColor: 'white'},
-            headerRight:()=> {
-                return(<Icon name={'bell-outline'} size={32} />)
-            }
-        }}>
+            screenOptions={{
+                headerStyle:{ backgroundColor: 'white'},
+                headerRight:()=> {
+                    return(<Icon name={'bell-outline'} size={32} />)
+                }
+            }}>
         <Stack.Screen 
             name="Splash"
             component={SplashScene}
@@ -40,26 +40,44 @@ function RootNavigate() {
         <Stack.Screen
             name="TabNavigator"
             component={TabNavigator}
+            options={{
+                headerShown:false
+            }}
         />
         <Stack.Screen
             name="FollowNews"
             component={FollowNews}
+            options={{
+                headerShown:false
+            }}
         />
         <Stack.Screen
             name="PrayerLetter"
             component={PrayerLetter}
+            options={{
+                headerShown:false
+            }}
         />
         <Stack.Screen
             name="MyGBS"
             component={MyGBS}
+            options={{
+                headerShown:false
+            }}
         />
         <Stack.Screen
             name="LeaderGBS"
             component={LeaderGBS}
+            options={{
+                headerShown:false
+            }}
         />
         <Stack.Screen
             name="MyPage"
             component={MyPage}
+            options={{
+                headerShown:false
+            }}
         />
         </Stack.Navigator>
       </NavigationContainer>

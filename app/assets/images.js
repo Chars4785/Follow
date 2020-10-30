@@ -7,5 +7,14 @@ const images = {
     imgFollow:require('./images/imgFollow/imgFollow.png'),
     iconYoutube:require('./images/iconYoutube/iconYoutube.png'),
     iconInstagram:require('./images/iconInstagram/iconInstagram.png'),
+    iconDailyAble:require('./images/iconDailyAble/iconDailyAble.png'),
+    iconHomeAble:require('./images/iconHomeAble/iconHomeAble.png'),
+    iconLetterAble:require('./images/iconLetterAble/iconLetterAble.png'),
+    iconMypageAble:require('./images/iconMypageAble/iconMypageAble.png'),
+    iconScheduleAble:require('./images/iconScheduleAble/iconScheduleAble.png'),
+    iconInstagramHome:require('./images/iconInstagramHome/iconInstagramHome.png'),
+    iconMypageHome:require('./images/iconMypageHome/iconMypageHome.png'),
+    iconPrayHome:require('./images/iconPrayHome/iconPrayHome.png'),
+    iconYoutubeHome:require('./images/iconYoutubeHome/iconYoutubeHome.png'),
 };
 export default images;

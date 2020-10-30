@@ -1,24 +1,17 @@
 import React,{ useState } from 'react';
-import { Provider } from 'react-redux'
-import {createStore} from 'redux'
+import { Provider } from 'mobx-react';
 import {
   StyleSheet,View,Text
 } from 'react-native';
 import RootNavigate from './app/components/Navigate/RootNavigate'
-import reducer from './reducers'
-
-const store = createStore(reducer)
+import rootStore from './app/api/store/RootStore';
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <Provider rootStore={rootStore}>
       <RootNavigate />
     </Provider>
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default App;

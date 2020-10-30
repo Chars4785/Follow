@@ -3,6 +3,7 @@ import { View, Text,Image,StyleSheet, ActivityIndicator,SafeAreaView} from 'reac
 import Images from '@assets/images';
 import { getWidthScaledValue as wsv, getHeightScaledValue as hsv } from '../../api/util';
 import DeviceInfo from 'react-native-device-info';
+import { inject } from 'mobx-react';
 
 const description = `
 예수님을 따르는 제자가 되어
@@ -12,7 +13,6 @@ const description = `
 `
 
 const SplashScene = ({ navigation }) => {
-
     useEffect(()=>{
         setTimeout(()=>{
             // navigation.replace('Login')

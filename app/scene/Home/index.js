@@ -1,17 +1,35 @@
-import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet,ScrollView,Image,Linking } from 'react-native'
+import React, {useEffect,useState} from 'react'
+import { View, Text, TouchableOpacity, StyleSheet,ScrollView,Image,Linking,AppState, SafeAreaView } from 'react-native'
 import { getWidthScaledValue as wsv, getHeightScaledValue as hsv } from '../../api/util';
 import Images from '@assets/images'
 import textStyles from '../../assets/styles/textStyles'
 import moment from 'moment';
+import { inject } from 'mobx-react';
+import images from '../../assets/images';
+import Swiper from 'react-native-swiper'
 
 const sarangURL = 'https://www.sarang.org/';
 const SNS_URL = 'https://www.instagram.com/follow_univ8/'
 const YOUTUB_URL = 'https://www.youtube.com/channel/UCO5cYdn0sDFVowC8mV-gHBw';
+const mainMessage = 
+`예수님을 따르는 제자가 되어,
+세상을 따르지 않고,
+세상이 예수님을 따르게 하는 팔로우`
 
-const Home = ({ navigation }) => {
+const Home = inject("rootStore")(({ navigation, rootStore }) => {
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress', e => {
+      // Prevent default behavior
+
+      alert('마이페이지 기도편지');
+      // Do something manually
+      // ...
+    });
+  }, [navigation]);
   //test
-
+  const [ test, setTest ] = useState(false);
+  const [ test2, setTest2 ] = useState(false);
 
   const onPressMypage = () =>{
     navigation.navigate({
@@ -26,15 +44,18 @@ const Home = ({ navigation }) => {
   }
 
   const onPressPrayerLetter = () =>{
-    navigation.navigate({
-      name:'PrayerLetter'
-    })
+    setTest2(true);
+    // navigation.navigate({
+    //   name:'PrayerLetter'
+    // })
   }
 
   const onPressMyGBS = () =>{
-    navigation.navigate({
-      name:'MyGBS'
-    })
+    setTest(true)
+    AppState.removeEventListener('change',checkAppState)
+    // navigation.navigate({
+    //   name:'MyGBS'
+    // })
   }
 
   const onPressLeader = () =>{
@@ -54,188 +75,151 @@ const Home = ({ navigation }) => {
     })
     .catch((err) => console.error('An error occurred', err));
   }
+  const checkAppState = (nextAppState) =>{
+      if( nextAppState === 'background' ){
+        console.log("GO_background")
+      }
+  
+      if( nextAppState === 'active' || AppState.currentState ==='active' ){
+        console.log("GO_forground")
+      }
+    }
+
+  useEffect( ()=>{
+    console.log("test",test);
+    // console.log("test2",test2)
+    // if( test  ){
+    //   console.log("remove")
+    //   return ()=>{
+    //     AppState.removeEventListener('change',checkAppState)
+    //   } 
+    // }
+    
+
+    AppState.addEventListener('change',checkAppState);
+    return () =>{
+      AppState.removeEventListener('change',checkAppState)
+    } 
+  },[ ])
 
   return (
-    <View style={{ flex: 1,  justifyContent: 'center' }}>
-      <ScrollView>
-      <View style={styles.UserInfoBoxStyle}>
-        <View style={styles.InfoImageStyle}>
-          <Image source={Images.iconMypage} />
+    <SafeAreaView style={{ flex: 1,  justifyContent: 'center' }}>
+      <View style={styles.safeAreaStyle} />
+      <ScrollView
+        bounces={false}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.messageWrapper}>
+            <Image source={images.imgFollow} />
+            <Text>"</Text>
+            {/* 서버에서 받도록 */}
+              <Text style={styles.messageText}>{mainMessage}</Text>
+            <Text>"</Text>
         </View>
-        <View style={styles.InforDetailWrapper}>
-          <View style={styles.InfoDetailFirst}>
-            <Text style={styles.InfoDepartment}>대학 8부</Text>
-            <Text style={styles.InfName}>이종민</Text>
+        <View style={styles.contentWrapper}>
+          <TouchableOpacity style={[styles.contentStyle,{backgroundColor:'#e93b3b'}]}>
+            <Image style={styles.contentImage} source={images.iconYoutubeHome} />
+            <Text style={styles.contentText}>유튜브</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.contentStyle,{backgroundColor:'#ff9c1b'}]}>
+            <Image style={styles.contentImage} source={images.iconInstagramHome} />
+            <Text style={styles.contentText}>인스타그램</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.contentStyle,{backgroundColor:'#3b7be5'}]}>
+            <Image style={styles.contentImage} source={images.iconPrayHome} />
+            <Text style={styles.contentText}>중보기도함</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.contentStyle,{backgroundColor:'#0ab7ca'}]}>
+            <Image style={styles.contentImage} source={images.iconMypageHome} />
+            <Text style={styles.contentText}>마이페이지</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.swiperWrapper}>
+          <Swiper 
+            style={styles.swiperWrapper} 
+            showsButtons={false}
+            activeDotStyle={{ backgroundColor:'#e63258' }}
+            dotStyle={{ backgroundColor:'#e2e2e2', borderColor:'#acacac' }}
+            paginationStyle={{
+              bottom: -23,
+            }}
+          >
+            <Image resizeMode="contain" style={{height:wsv(424), width:wsv(750)}} source={require('../../../testFile/page1.jpeg')} />
+            <Image resizeMode="contain" style={{height:wsv(424), width:wsv(750)}} source={require('../../../testFile/page2.jpeg')} />
+            <Image resizeMode="contain" style={{height:wsv(424), width:wsv(750)}} source={require('../../../testFile/page3.jpeg')} />
+          </Swiper>
+        </View>
+        <View style={styles.worshipWrapper}>
+          <View style={styles.worshipContainer}>
+            <Text style={styles.worshipText}>사랑의교회 예배시간 안내 바로가기</Text>
           </View>
-          <View style={styles.InfoDetailSecond}>
-          <TouchableOpacity onPress={onPressMypage} >
-            <Text>
-                정보 보기 <Image source={Images.selectArrow}/>
-            </Text>
-          </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-        <TouchableOpacity style={styles.AttendanceCheckStyle}>
-          {/* 리더 아닌 사람들은 출석 체크 확인 할 수 있도록 만들기 */}
-          <Text> 출석 체크 하기</Text> 
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.FollowNewsStyle} onPress={onPressFollowNews}>
-          <Text>{ moment().subtract(1, 'weeks').endOf('isoWeek').format('YYYY.MM.DD') }</Text>
-          <Text>Follow 소식</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.PrayerLetterStyle} onPress={onPressPrayerLetter}>
-          {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
-          <Text style={{fontSize:hsv(50)}}>{moment().month()+1}</Text>
-          <Image source={Images.imgMonth} />
-          <Text>기도 편지함</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.MyGBS_Style} onPress={onPressMyGBS}>
-          {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
-          <Text> GBS </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.MyGBS_Style} onPress={onPressLeader}>
-          {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
-          <Text> GBS 관리 </Text>
-        </TouchableOpacity>
-        <View style={styles.infoTextView}>
-          <Text style={styles.InfName}>  Info. </Text>
-        </View>
-        <View style={styles.urlViewWrapper}>
-          <TouchableOpacity style={styles.urlStyle} onPress={() =>onPressUrl(sarangURL)}>
-            {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
-            <Text style={styles.urlTextStyle}> 사랑의 교회 </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.urlStyle} onPress={() =>onPressUrl(YOUTUB_URL)}>
-            {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
-            <Image source={Images.iconYoutube} />
-            <Text style={styles.urlTextStyle}> 대학 8부 유튜브 </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.urlStyle} onPress={() =>onPressUrl(SNS_URL)}>
-            {/* 업데이트 날짜 언제 기도편지인지 또 모든 기도 편지 볼수 있으면 좋을 듯 */}
-            <Image source={Images.iconInstagram} />
-            <Text style={styles.urlTextStyle}> 인스타그램 </Text>
-          </TouchableOpacity>      
         </View>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   )
-}
+})
 
 export default Home
 
-const defaultBoxStyle ={
-  shadowOffset:{height: 0, width: 0},
-  shadowColor:'gray',
-  shadowRadius: 5,
-  shadowOpacity:0.2,
-  flex:1,
-  backgroundColor:'white',
-  marginHorizontal: wsv(20),
-  marginVertical:hsv(15),
-  height: hsv(113),
-  borderRadius: 20,
-}
-
 const styles = StyleSheet.create({
-  UserInfoBoxStyle:{
-    flexDirection:'row',
-    marginHorizontal: wsv(20),
-    marginTop:hsv(10),
-    flex:1,
+  safeAreaStyle:{
+    ...StyleSheet.absoluteFillObject,
+    top:0,
+    height:wsv(100),
+    backgroundColor:'white'
   },
-  InfoImageStyle:{
-    
-  },
-  InforDetailWrapper:{
-    flex:3,
-    justifyContent:'center',
-  },
-  InfoDepartment:{
-    fontSize: hsv(10),
-    marginHorizontal:hsv(3),
-  },
-  InfName:{
-    ...textStyles.boldText,
-    fontSize:hsv(20),
-  },
-  InfoDetailFirst:{
-    flex:1,
-    justifyContent:'flex-start',
-    marginHorizontal:wsv(10),
-  },
-  InfoDetailSecond:{
-    flexDirection:'row',
-    flex:1,
-    alignItems:'flex-end',
-    justifyContent:'flex-start',
-    marginHorizontal:wsv(10),
-  },
-  InfoDetailSelectWrapper:{
-    flex:1,
-    flexDirection:'row',
-    alignItems:'flex-end',
-    justifyContent:'center'
-  },
-  AttendanceCheckStyle:{
-    shadowOffset:{height: 0, width: 0},
-    shadowColor:'gray',
-    shadowRadius: 5,
-    shadowOpacity:0.2,
-    flex:1,
+  messageWrapper:{
+    height:wsv(359),
     backgroundColor:'white',
-    marginHorizontal: wsv(20),
-    marginTop:hsv(20),
-    marginBottom:hsv(15),
-    height: hsv(50),
-    borderRadius: 20,
-    alignItems:'center',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  messageText:{
+    fontSize: wsv(36),
+    textAlign:'center',
+  },
+  contentWrapper:{
     flexDirection:'row',
+    height:wsv(625),
+    flexWrap:'wrap',
+    justifyContent:'center',
+    alignContent:'center'
   },
-  FollowNewsStyle:{
-    ...defaultBoxStyle,
+  contentStyle:{
     alignItems:'center',
-    justifyContent:'center'
+    height: wsv(227),
+    width: wsv(298),
+    margin: wsv(11),
   },
-  PrayerLetterStyle:{
-    ...defaultBoxStyle,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center'
+  contentImage:{
+    marginTop:wsv(35),
+    width:wsv(112),
+    height:wsv(112)
   },
-  MyGBS_Style:{
-    ...defaultBoxStyle,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center'
+  contentText:{
+    ...textStyles.mediumText,
+    marginTop: wsv(24),
+    color: 'white',
+    fontSize:wsv(30)
   },
-  ChurchNewsStyle:{
-    ...defaultBoxStyle,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center'
+  swiperWrapper:{
+    height:wsv(424),
   },
-  infoTextView:{
-    marginHorizontal: wsv(20),
-    
+  worshipWrapper:{
+    height:wsv(285),
+    justifyContent:'center',
+    alignItems:'center'
   },
-  urlViewWrapper:{
-    flex:1,
-    paddingTop:hsv(10),
-    borderTopWidth:1,
-    borderColor:'black',
-    marginHorizontal: wsv(20),
-    marginVertical:hsv(15),
-    height: hsv(113),
-    borderRadius: 20,
+  worshipContainer:{
+    width:wsv(616),
+    height:wsv(109),
+    backgroundColor:'#e63258',
+    justifyContent:'center',
+    alignItems:'center'
   },
-  urlStyle:{
-    flexDirection:'row',
-    alignItems:'center',
-    margin:hsv(8),
-  },
-  urlTextStyle:{
+  worshipText:{
     ...textStyles.boldText,
-    marginLeft:wsv(10),
+    fontSize: wsv(30),
+    color:'white',
   }
 })
