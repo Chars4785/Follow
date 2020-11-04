@@ -16,5 +16,10 @@ const images = {
     iconMypageHome:require('./images/iconMypageHome/iconMypageHome.png'),
     iconPrayHome:require('./images/iconPrayHome/iconPrayHome.png'),
     iconYoutubeHome:require('./images/iconYoutubeHome/iconYoutubeHome.png'),
+    iconDailyUnAble:require('./images/iconDailyUnAble/iconDailyUnAble.png'),
+    iconHomeUnAble:require('./images/iconHomeUnAble/iconHomeUnAble.png'),
+    iconLetterUnAble:require('./images/iconLetterUnAble/iconLetterUnAble.png'),
+    iconMypageUnAble:require('./images/iconMypageUnAble/iconMypageUnAble.png'),
+    iconScheduleUnAble:require('./images/iconScheduleUnAble/iconScheduleUnAble.png')
 };
 export default images;

@@ -2,7 +2,7 @@ import { Dimensions, Platform } from 'react-native';
 import SafeArea from 'react-native-safe-area';
 
 const screenDimensions = Dimensions.get('window');
-const designDimensions = { width: 750, height: 1560 };
+const designDimensions = { width: 750, height: 1854 };
 
 const LayoutConfig = {
     SCREEN_WIDTH: screenDimensions.width,

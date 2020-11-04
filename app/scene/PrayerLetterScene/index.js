@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { View, Text } from 'react-native'
 
-const MyPrayerLetter = ({navigation}) => {
+const PrayerLetterScene = ({navigation}) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener('tabPress', e => {
           // Prevent default behavior
@@ -14,9 +14,9 @@ const MyPrayerLetter = ({navigation}) => {
       }, [navigation]);
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>MyPrayerLetter</Text>
+            <Text>PrayerLetterScene</Text>
         </View>
     )
 }
 
-export default MyPrayerLetter
+export default PrayerLetterScene

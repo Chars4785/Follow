@@ -7,7 +7,7 @@ import moment from 'moment';
 import { inject } from 'mobx-react';
 import images from '../../assets/images';
 import Swiper from 'react-native-swiper'
-
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 const sarangURL = 'https://www.sarang.org/';
 const SNS_URL = 'https://www.instagram.com/follow_univ8/'
 const YOUTUB_URL = 'https://www.youtube.com/channel/UCO5cYdn0sDFVowC8mV-gHBw';
@@ -16,20 +16,18 @@ const mainMessage =
 세상을 따르지 않고,
 세상이 예수님을 따르게 하는 팔로우`
 
-const Home = inject("rootStore")(({ navigation, rootStore }) => {
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress', e => {
-      // Prevent default behavior
-
-      alert('마이페이지 기도편지');
-      // Do something manually
-      // ...
-    });
-  }, [navigation]);
+const HomeScene = inject("rootStore")(({ navigation, rootStore }) => {
+  const { userStore } = rootStore;
   //test
   const [ test, setTest ] = useState(false);
   const [ test2, setTest2 ] = useState(false);
+  
+  useFocusEffect(()=>{
+    console.log("test",test);
+    console.log("22")
+    console.log("11",userStore.getCheckLogin())
+    return () => console.log("out")
+  },[])
 
   const onPressMypage = () =>{
     navigation.navigate({
@@ -75,6 +73,7 @@ const Home = inject("rootStore")(({ navigation, rootStore }) => {
     })
     .catch((err) => console.error('An error occurred', err));
   }
+
   const checkAppState = (nextAppState) =>{
       if( nextAppState === 'background' ){
         console.log("GO_background")
@@ -84,9 +83,11 @@ const Home = inject("rootStore")(({ navigation, rootStore }) => {
         console.log("GO_forground")
       }
     }
-
+    
   useEffect( ()=>{
     console.log("test",test);
+    console.log("22")
+    console.log("11",userStore.getCheckLogin())
     // console.log("test2",test2)
     // if( test  ){
     //   console.log("remove")
@@ -100,7 +101,7 @@ const Home = inject("rootStore")(({ navigation, rootStore }) => {
     return () =>{
       AppState.removeEventListener('change',checkAppState)
     } 
-  },[ ])
+  },[ navigation])
 
   return (
     <SafeAreaView style={{ flex: 1,  justifyContent: 'center' }}>
@@ -159,7 +160,7 @@ const Home = inject("rootStore")(({ navigation, rootStore }) => {
   )
 })
 
-export default Home
+export default HomeScene
 
 const styles = StyleSheet.create({
   safeAreaStyle:{

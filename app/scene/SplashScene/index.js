@@ -7,8 +7,11 @@ import { inject } from 'mobx-react';
 
 const description = `
 예수님을 따르는 제자가 되어
+
 세상을 따르지 않고
+
 세상이 예수님을 따르게 하는 공동체
+
 대학 8부 Follow
 `
 
@@ -53,7 +56,7 @@ const styles = StyleSheet.create({
     },
     descriptionStyle:{
         textAlign:'center',
-        justifyContent:'center',
+        justifyContent:'space-around',
         alignItems:'center',
         lineHeight:hsv(20),
     },

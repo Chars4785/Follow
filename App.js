@@ -8,7 +8,7 @@ import rootStore from './app/api/store/RootStore';
 
 const App = () => {
   return (
-    <Provider rootStore={rootStore}>
+    <Provider rootStore={{...rootStore}}>
       <RootNavigate />
     </Provider>
   );
