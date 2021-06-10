@@ -20,6 +20,7 @@ const images = {
     iconHomeUnAble:require('./images/iconHomeUnAble/iconHomeUnAble.png'),
     iconLetterUnAble:require('./images/iconLetterUnAble/iconLetterUnAble.png'),
     iconMypageUnAble:require('./images/iconMypageUnAble/iconMypageUnAble.png'),
-    iconScheduleUnAble:require('./images/iconScheduleUnAble/iconScheduleUnAble.png')
+    iconScheduleUnAble:require('./images/iconScheduleUnAble/iconScheduleUnAble.png'),
+    loginPageLogo:require('./images/loginPageLogo/loginPageLogo.png')
 };
 export default images;
