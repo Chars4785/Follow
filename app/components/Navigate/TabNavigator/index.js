@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScene from '../../../scene/HomeScene';
 import PrayerLetterScene from '../../../scene/PrayerLetter';
 import FollowMark from '../../../scene/FollowMark';
-import Calendar from '../../../scene/Calendar';
+import CalendarScene from '../../../scene/CalendarScene';
 import Daily from '../../../scene/Daily';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import images from '@assets/images';
@@ -21,7 +21,7 @@ const TabNavigator =inject('rootStore')(({ navigation, rootStore }) => {
   
   return (
       <Tab.Navigator 
-        initialRouteName="HOME"
+        initialRouteName="CALENDAR"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             if( route.name === 'HOME' ){
@@ -53,7 +53,7 @@ const TabNavigator =inject('rootStore')(({ navigation, rootStore }) => {
         }}
         >
         <Tab.Screen name="HOME" component={HomeScene}  />
-        <Tab.Screen name="CALENDAR" children={(props) => InitTabComponet({ component: Calendar, rootStore, ...props })} />
+        <Tab.Screen name="CALENDAR" children={(props) => InitTabComponet({ component: CalendarScene, rootStore, ...props })} />
         <Tab.Screen name="DAYIL" children={(props) => InitTabComponet({ component: Daily, rootStore, ...props })} />
         <Tab.Screen name="PRAYERLETTER" component={PrayerLetterScene} />
         <Tab.Screen name="MYPAGE" component={MyPage} />
