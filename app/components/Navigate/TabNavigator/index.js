@@ -25,20 +25,55 @@ const TabNavigator =inject('rootStore')(({ navigation, rootStore }) => {
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
             if( route.name === 'HOME' ){
-                return focused ? <Image style={styles.homeIcon} source={images.iconHomeAble} />
-                  : <Image style={styles.homeIcon} source={images.iconHomeUnAble} />
+                return focused ?
+                    <View style={styles.iconWrapper}>
+                        <Image style={styles.homeIcon} source={images.iconHomeAble} />
+                        <Text style={styles.iconAbleText}>홈</Text>
+                    </View>
+                  : <View style={styles.iconWrapper}>
+                      <Image style={styles.homeUnIcon} source={images.iconHomeAble} />
+                      <Text style={styles.iconUnAbleText}>홈</Text>
+                    </View>
                 }else if( route.name === 'CALENDAR' ){
-                  return focused ? <Image style={styles.calendarIcon} source={images.iconScheduleAble} /> 
-                  : <Image style={styles.calendarIcon} source={images.iconScheduleUnAble} />
+                  return focused ?
+                    <View style={styles.iconWrapper}>
+                      <Image style={styles.calendarIcon} source={images.iconScheduleAble} /> 
+                      <Text style={styles.iconAbleText}>일정</Text>
+                    </View>
+                  : <View style={styles.iconWrapper}>
+                      <Image style={styles.calendarUnIcon} source={images.iconScheduleAble} />
+                      <Text style={styles.iconUnAbleText}>일정</Text>
+                    </View>
                 }else if( route.name === 'DAYIL' ){
-                  return focused ? <Image  style={styles.dailyIcon} source={images.iconDailyAble} /> 
-                  : <Image style={styles.dailyIcon}  source={images.iconDailyUnAble} />
+                  return focused ?
+                    <View style={styles.iconWrapper}>
+                      <Image  style={styles.dailyIcon} source={images.iconDailyAble} /> 
+                      <Text style={styles.iconAbleText}>부서</Text>
+                    </View>
+                  : <View style={styles.iconWrapper}>
+                      <Image style={styles.dailyUnIcon}  source={images.iconDailyAble} />
+                      <Text style={styles.iconUnAbleText}>부서</Text>
+                    </View>
                 }else if( route.name === 'PRAYERLETTER' ){
-                  return focused ? <Image style={styles.prayIcon} source={images.iconLetterAble} /> 
-                  : <Image style={styles.prayIcon} source={images.iconLetterUnAble} />
+                  return focused ?
+                    <View style={styles.iconWrapper}>
+                      <Image style={styles.prayIcon} source={images.iconLetterAble} /> 
+                      <Text style={styles.iconAbleText}>기도 편지</Text>
+                    </View>
+                  : <View style={styles.iconWrapper}>
+                      <Image style={styles.prayUnIcon} source={images.iconLetterAble} />
+                      <Text style={styles.iconUnAbleText}>기도 편지</Text>
+                    </View>
                 }else if( route.name === 'MYPAGE' ){
-                  return focused ? <Image style={styles.mypageIcon} source={images.iconMypageAble} /> 
-                  : <Image style={styles.mypageIcon} source={images.iconMypageUnAble} />
+                  return focused ?
+                    <View style={styles.iconWrapper}>
+                      <Image style={styles.mypageIcon} source={images.iconMypageAble} /> 
+                      <Text style={styles.iconAbleText}>My</Text>
+                    </View>
+                  : <View style={styles.iconWrapper}>
+                      <Image style={styles.mypageUnIcon} source={images.iconMypageAble} />
+                      <Text style={styles.iconUnAbleText}>My</Text>
+                    </View>
                 }
           },
         })}
@@ -64,24 +99,62 @@ const TabNavigator =inject('rootStore')(({ navigation, rootStore }) => {
 export default TabNavigator
 
 const styles = StyleSheet.create({
+  iconWrapper:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  iconAbleText:{
+    fontSize:wsv(20),
+    marginTop:wsv(10)
+  },
+  iconUnAbleText:{
+    fontSize:wsv(20),
+    marginTop:wsv(10),
+    opacity:0.5
+  },
   homeIcon:{
-    width:wsv(39),
-    height: wsv(75)
+    width:wsv(45),
+    height:wsv(49)
   },
   calendarIcon:{
-    width:wsv(42),
-    height: wsv(75)
+    width:wsv(45),
+    height:wsv(49)
   },
   dailyIcon:{
-    width:wsv(74),
-    height:wsv(77)
+    width:wsv(45),
+    height:wsv(49)
   },
   prayIcon:{
-    width:wsv(74),
-    height: wsv(72)
+    width:wsv(45),
+    height:wsv(49)
   },
   mypageIcon:{
-    width:wsv(93),
-    height: wsv(77)
-  }
+    width:wsv(45),
+    height:wsv(49)
+  },
+  homeUnIcon:{
+    width:wsv(45),
+    height:wsv(49),
+    opacity: 0.5
+  },
+  calendarUnIcon:{
+    width:wsv(45),
+    height:wsv(49),
+    opacity: 0.5,
+  },
+  dailyUnIcon:{
+    width:wsv(45),
+    height:wsv(49),
+    opacity: 0.5,
+  },
+  prayUnIcon:{
+    width:wsv(45),
+    height:wsv(49),
+    opacity: 0.5,
+  },
+  mypageUnIcon:{
+    width:wsv(45),
+    height:wsv(49),
+    opacity: 0.5,
+  },
 })
